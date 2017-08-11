@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms"
+                        xmlns:helpers="clr-namespace:MeuPosto.Helpers;assembly=MeuPosto"                
+                        x:Class="MeuPosto.App">
+  
+  
+  <Application.Resources>
+
+
+    <ResourceDictionary>
+
+        <helpers:NumberToBooleanConverter x:Key="NumberToBooleanConverter"></helpers:NumberToBooleanConverter>
+      
+        <helpers:NaoDisponivelConverter x:Key="NaoDisponivelConverter"></helpers:NaoDisponivelConverter>
+      
+        <helpers:ByteToImageConverter x:Key="ByteToImageConverter"></helpers:ByteToImageConverter>
+
+        <!--Converter de ItemTapped Event -->
+        <helpers:ItemTappedEventArgsConverter x:Key="ItemTappedConverter"></helpers:ItemTappedEventArgsConverter>
+
+    </ResourceDictionary>
+
+  </Application.Resources>
+
+</prism:PrismApplication>

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:behaviors="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:renderers="clr-namespace:MeuPosto.Renderers;assembly=MeuPosto"
+             x:Class="MeuPosto.Views.MainPage"
+             Title="MeuPosto"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:content="clr-namespace:MeuPosto.ViewModels;assembly=MeuPosto"
+             xmlns:views="clr-namespace:MeuPosto.Views;assembly=MeuPosto">
+
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="0, 20, 0, 0"
+                    Android="0, 0, 0, 0" />
+    </ContentPage.Padding>
+    
+    
+    
+    <StackLayout  >
+        
+        <!--<BoxView HeightRequest="100" BackgroundColor="BurlyWood"></BoxView>-->
+
+
+        <AbsoluteLayout HeightRequest="{Binding CabecalhoSize}" BackgroundColor="BurlyWood">
+            <Image Source="logoApp.png" HeightRequest="80" WidthRequest="80" Margin="{Binding MargemImg}" AbsoluteLayout.LayoutFlags="All"  AbsoluteLayout.LayoutBounds="0.1,0.3,0.3,1"></Image>
+
+            <Label Text="Meu Posto" TextColor="Black" HorizontalOptions="End" FontSize="{Binding SizeFont}"  AbsoluteLayout.LayoutFlags="All" VerticalOptions="Center"  AbsoluteLayout.LayoutBounds="0.75,0.75,0.55,0.7">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>Charbroil</OnPlatform.iOS>
+                        <OnPlatform.Android>Charbroil.ttf#Charbroil</OnPlatform.Android>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+
+        </AbsoluteLayout>
+        <!--<StackLayout Orientation="Horizontal" HeightRequest="100" BackgroundColor="BurlyWood"  HorizontalOptions="FillAndExpand">
+
+            <Image Source="logoApp.png" HeightRequest="80" WidthRequest="80" Margin="{Binding MargemImg}"></Image>
+
+            --><!--<renderers:HtmlFormattedLabel Text="{Binding Cabecalho}" FontSize="34" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,0,0">
+                <renderers:HtmlFormattedLabel.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>Charbroil</OnPlatform.iOS>
+                        <OnPlatform.Android>Charbroil.ttf#Charbroil</OnPlatform.Android>
+                    </OnPlatform>
+                </renderers:HtmlFormattedLabel.FontFamily>
+            </renderers:HtmlFormattedLabel>--><!--
+            <Label Text="Meu Posto" TextColor="Black" HorizontalOptions="Center" FontSize="{Binding SizeFont}"  VerticalOptions="Center" Margin="10,0,0,0" HorizontalTextAlignment="Center">
+                <Label.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String">
+                        <OnPlatform.iOS>Charbroil</OnPlatform.iOS>
+                        <OnPlatform.Android>Charbroil.ttf#Charbroil</OnPlatform.Android>
+                    </OnPlatform>
+                </Label.FontFamily>
+            </Label>
+        </StackLayout>-->
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" >
+            <Label Text="Ordem por:" TextColor="Black"  FontSize="{Binding MsgOrdenarSize}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <Picker SelectedIndex="{Binding IndicePesquisa, Mode=TwoWay}" ItemsSource="{Binding Pesquisas}" Title="Selecione" WidthRequest="{Binding PickerSize}" Unfocused="DesfocarPicker">
+            </Picker>
+           
+        </StackLayout>
+        <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+
+        <ListView ItemsSource="{Binding ListaPostos}" ItemSelected="ListaBusca_OnItemSelected" x:Name="ListaBusca" HasUnevenRows="True"  SeparatorColor="Transparent"   IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshCommand="{Binding RefreshCommand}" >
+            <ListView.Behaviors>
+                <behaviors:EventToCommandBehavior EventName="ItemTapped" Command="{Binding PostoCommand}"  EventArgsParameterPath="Item"
+                                                  EventArgsConverter="{StaticResource ItemTappedConverter}" ></behaviors:EventToCommandBehavior>
+            </ListView.Behaviors>
+                
+                <ListView.Triggers>
+                <DataTrigger Binding="{Binding ListaVazia}" Value="true" TargetType="ListView">
+                    <Setter Property="SeparatorVisibility"  Value="None" ></Setter>
+                   </DataTrigger>
+
+                <DataTrigger Binding="{Binding ListaVazia}" Value="false" TargetType="ListView">
+                    <Setter Property="SeparatorVisibility"  Value="Default" ></Setter>
+                </DataTrigger>
+
+            </ListView.Triggers>
+            
+            <ListView.Header >
+                <StackLayout IsVisible="{Binding ListaVazia}" HorizontalOptions="Center"  Orientation="Vertical" WidthRequest="{Binding LarguraTela}" >
+                    <Label Text="{Binding TextoVazio}" HorizontalOptions="Center" VerticalOptions="End" TextColor="Black"  FontSize="{Binding MsgErroSize}" >
+                            <Label.Triggers >
+                                <DataTrigger Binding="{Binding ListaVazia}" Value="true" TargetType="Label">
+                                    <Setter Property="Margin" Value="0,140,0,0"></Setter>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
+                        <StackLayout IsVisible="{Binding ListaVazia}"  Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Puxe para atualizar." HorizontalOptions="Center" VerticalOptions="End" TextColor="Black"  FontSize="{Binding MsgErroSize}" >
+                         </Label>
+                        <Image Source="seta_baixo.png" HeightRequest="30" WidthRequest="30" ></Image>
+                    </StackLayout>
+                    <StackLayout.Triggers>
+                        <DataTrigger Binding="{Binding ListaVazia}" Value="false" TargetType="StackLayout">
+                            <Setter Property="HeightRequest" Value="1" ></Setter>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+                <!--<StackLayout  HorizontalOptions="Center"  Orientation="Vertical" WidthRequest="200" >
+                    <Label Text="Vazio" HorizontalOptions="Center" VerticalOptions="End" TextColor="Black"  FontSize="{Binding MsgErroSize}" >
+                        <Label.Triggers >
+                            <DataTrigger Binding="{Binding ListaVazia}" Value="true" TargetType="Label">
+                                <Setter Property="Margin" Value="0,140,0,0"></Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <StackLayout IsVisible="{Binding ListaVazia}"  Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="Puxe para atualizar." HorizontalOptions="Center" VerticalOptions="End" TextColor="Black"  FontSize="{Binding MsgErroSize}" >
+                        </Label>
+                        <Image Source="seta_baixo.png" HeightRequest="30" WidthRequest="30" ></Image>
+                    </StackLayout>
+                    <StackLayout.Triggers>
+                        <DataTrigger Binding="{Binding ListaVazia}" Value="false" TargetType="StackLayout">
+                            <Setter Property="HeightRequest" Value="1" ></Setter>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>-->
+            </ListView.Header>
+   
+            <ListView.ItemTemplate >
+                <DataTemplate >
+                    <ViewCell >
+                        <StackLayout>
+                            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" Margin="0,0,0,0" >
+                                <Image Source="{Binding distribuidora.logo, Converter={StaticResource ByteToImageConverter}}"  HeightRequest="{Binding Path=BindingContext. LogoAltura, Source={x:Reference Name=ListaBusca}}" WidthRequest="{Binding Path=BindingContext. LogoLargura, Source={x:Reference Name=ListaBusca}}" Margin="20,0,0,0"></Image>
+
+                                <StackLayout Orientation="Vertical" Margin="25,0,0,0" HorizontalOptions="Center" >
+                                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal" >
+                                        <Label Text="{Binding nome}" FontAttributes="Bold" TextColor="Black" HorizontalOptions="CenterAndExpand" FontSize="{Binding Path=BindingContext. NomePostoSize, Source={x:Reference Name=ListaBusca}}"></Label>
+                                        <Label Text="{Binding distanciaDoPonto}"  TextColor="Gray" VerticalTextAlignment="Center"  FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}"></Label>
+                                    </StackLayout>
+                                   
+                                    <Label Text="{Binding gasolinaComum, Converter={StaticResource NaoDisponivelConverter}, StringFormat='Gasolina Comum: {0:N}'}"  FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding Path=BindingContext. IndicePesquisa, Source={x:Reference Name=ListaBusca}}" Value="1" TargetType="Label">
+                                                <Setter Property="FontAttributes" Value="Bold" ></Setter>
+                                                <Setter Property="FontSize" Value="{Binding Path=BindingContext. MsgDestacadaSize, Source={x:Reference Name=ListaBusca}}" ></Setter>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding gasolinaAditivada, Converter={StaticResource NaoDisponivelConverter}, StringFormat='Gasolina Aditivada: {0:N}'}" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding Path=BindingContext. IndicePesquisa, Source={x:Reference Name=ListaBusca}}" Value="2" TargetType="Label">
+                                                <Setter Property="FontAttributes" Value="Bold" ></Setter>
+                                                <Setter Property="FontSize" Value="{Binding Path=BindingContext. MsgDestacadaSize, Source={x:Reference Name=ListaBusca}}" ></Setter>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding alcool, Converter={StaticResource NaoDisponivelConverter}, StringFormat='Etanol: {0:N}'}" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}">
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding Path=BindingContext. IndicePesquisa, Source={x:Reference Name=ListaBusca}}" Value="3" TargetType="Label">
+                                                <Setter Property="FontAttributes" Value="Bold" ></Setter>
+                                                <Setter Property="FontSize" Value="{Binding Path=BindingContext. MsgDestacadaSize, Source={x:Reference Name=ListaBusca}}" ></Setter>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding diesel, Converter={StaticResource NaoDisponivelConverter}, StringFormat='Diesel: {0:N}'}" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" >
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding Path=BindingContext. IndicePesquisa, Source={x:Reference Name=ListaBusca}}" Value="4" TargetType="Label">
+                                                <Setter Property="FontAttributes" Value="Bold" ></Setter>
+                                                <Setter Property="FontSize" Value="{Binding Path=BindingContext. MsgDestacadaSize, Source={x:Reference Name=ListaBusca}}" ></Setter>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <Label Text="{Binding gnv, Converter={StaticResource NaoDisponivelConverter}, StringFormat='GNV: {0:N}'}" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" >
+                                        <Label.Triggers>
+                                            <DataTrigger Binding="{Binding Path=BindingContext. IndicePesquisa, Source={x:Reference Name=ListaBusca}}" Value="5" TargetType="Label">
+                                                <Setter Property="FontAttributes" Value="Bold" ></Setter>
+                                                <Setter Property="FontSize" Value="{Binding Path=BindingContext. MsgDestacadaSize, Source={x:Reference Name=ListaBusca}}" ></Setter>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                    <StackLayout Orientation="Horizontal">
+
+                                        <Label Text="Aceita:" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" >
+                                        </Label>
+                                        <Label Text="Dinheiro" TextColor="Green" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" IsVisible="{Binding  dinheiro}" />
+                                        <Label Text="Débito" TextColor="Blue" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" IsVisible="{Binding  debito}"/>
+                                        <Label Text="Crédito" TextColor="Indigo" FontSize="{Binding Path=BindingContext. MsgPrecosSize, Source={x:Reference Name=ListaBusca}}" IsVisible="{Binding  credito}" />
+
+                                    </StackLayout>
+
+                                </StackLayout>
+                               
+
+                            </StackLayout>
+                             <BoxView BackgroundColor="Black" HeightRequest="1"></BoxView>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+                
+            </ListView.ItemTemplate>
+            
+            
+
+        </ListView>
+
+    </StackLayout>
+</ContentPage>

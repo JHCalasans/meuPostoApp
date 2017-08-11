@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIDeviceFamily</key>
+	<array>
+		<integer>1</integer>
+		<integer>2</integer>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationPortraitUpsideDown</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>MinimumOSVersion</key>
+	<string>6.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>MeuPosto</string>
+	<key>CFBundleIdentifier</key>
+	<string>br.com.meuposto</string>
+	<key>CFBundleVersion</key>
+	<string>1.2.2</string>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon-App-60x60@2x</string>
+		<string>Icon-App-60x60@3x</string>
+		<string>Icon-App-76x76@1x</string>
+		<string>Icon-App-76x76@2x</string>
+		<string>Icon-App-40x40@1x</string>
+		<string>Icon-App-40x40@2x</string>
+		<string>Icon-App-40x40@3x</string>
+		<string>Icon-App-29x29@1x</string>
+		<string>Icon-App-29x29@2x</string>
+		<string>Icon-App-29x29@3x</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+		<string>external-accessory</string>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Tipo de Documento 1</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeName</key>
+			<string>Tipo de Documento 2</string>
+		</dict>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Fonts/Charbroil.ttf</string>
+	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Verificação de Localização</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Verificação de Localização</string>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
+	<key>Localizations</key>
+	<string>Verificação de Localização</string>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>NSCalendarsUsageDescription</key>
+	<string>New Entry</string>
+</dict>
+</plist>
