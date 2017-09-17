@@ -11,13 +11,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
+
 	<key>MinimumOSVersion</key>
 	<string>6.0</string>
 	<key>CFBundleDisplayName</key>
@@ -56,18 +50,16 @@
 		<string>Fonts/Charbroil.ttf</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Verificação de Localização</string>
+	<string>erificação de Localização Para Buscar Postos Mais Próximos</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Verificação de Localização</string>
+	<string>Verificação de Localização Para Buscar Postos Mais Próximos</string>
 	<key>XSLaunchImageAssets</key>
 	<string>Resources/Media.xcassets/LaunchImages.launchimage</string>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Media.xcassets/AppIcons.appiconset</string>
 	<key>Localizations</key>
-	<string>Verificação de Localização</string>
+	<string>erificação de Localização Para Buscar Postos Mais Próximos</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
-	<key>NSCalendarsUsageDescription</key>
-	<string>New Entry</string>
 </dict>
 </plist>

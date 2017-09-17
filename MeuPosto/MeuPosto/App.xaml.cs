@@ -16,7 +16,7 @@ namespace MeuPosto
             
             InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("NavigationPage/Detalhes");
         }
 
         protected override void RegisterTypes()

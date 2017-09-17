@@ -88,7 +88,7 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <BuildIpa>true</BuildIpa>
-    <CodesignProvision>77eb811b-b1bb-4f8b-ac62-93cc8b6fca4d</CodesignProvision>
+    <CodesignProvision>JOAO PROFILE</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>

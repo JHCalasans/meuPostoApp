@@ -3,8 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local="clr-namespace:MeuPosto.Renderers;assembly=MeuPosto"
              x:Class="MeuPosto.Views.Detalhes">
+
+    <!--<Image Source="{Binding DistribuidoraVar.logo, Converter={StaticResource ByteToImageConverter}}"  HeightRequest="100" 
+           WidthRequest="100" Margin="20,0,0,0"></Image>-->
     
-    
-  
+    <local:CustomWebView Uri="{Binding UriString}" ></local:CustomWebView>
+
+
+
+
 </ContentPage>
